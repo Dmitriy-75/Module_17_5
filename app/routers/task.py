@@ -51,7 +51,7 @@ async def task_by_id(task_id:int, db: DbSession):
 @router.post("/create")
 async def create_task(db: DbSession, cr_task: CreateTask, user_id: int):
 
-    check_id = db.scalars(select(User).where(User.id == user_id))
+    check_id = db.scalar(select(User).where(User.id == user_id))
     if check_id is None:
         return HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
