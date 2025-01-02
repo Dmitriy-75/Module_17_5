@@ -17,7 +17,7 @@ router = APIRouter(prefix='/user', tags=['user'])
 
 @router.get('/user_id/tasks')
 async def tasks_by_user_id (db: Annotated[Session, Depends(get_db)], user_id: int):
-    user_found = db.scalar(select(User).where(User.id == user_id))
+    user_found = db.scalars(select(User).where(User.id == user_id))
     if user_found is None:
         return HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
