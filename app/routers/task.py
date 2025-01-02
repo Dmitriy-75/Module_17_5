@@ -33,7 +33,7 @@ async def all_tasks(db: DbSession):
 
 @router.get('/task_id')
 async def task_by_id(task_id:int, db: DbSession):
-    by_id_task = db.scalars(select(Task).where(Task.id == task_id))
+    by_id_task = db.scalar(select(Task).where(Task.id == task_id))
     if by_id_task is None:
         return HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -84,7 +84,7 @@ async def update_task(db: DbSession, task_id:int, upd_user: UpdateTask):
 
 @router.delete("/delete")
 async def delete_task(db: DbSession, task_id:int):
-    check_id = db.scalars(select(Task).where(Task.id == task_id))
+    check_id = db.scalar(select(Task).where(Task.id == task_id))
     if check_id is None:
         return HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
